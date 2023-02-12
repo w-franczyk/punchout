@@ -1,0 +1,70 @@
+<Overseer>:
+  BoxLayout:
+    orientation: 'vertical'
+    size: root.width, root.height
+    size_hint: None, None
+
+    # top panel
+    BoxLayout:
+      canvas:
+        Color:
+          rgb: 0.12, 0.12, 0.12
+        Rectangle:
+          size: self.size
+          pos: self.pos
+      height: 60
+      size_hint: 1, None
+      orientation: 'horizontal'
+      spacing: 10
+      padding: 10
+      BtnExport:
+        width: 180
+        size_hint: None, 1
+        text: "Export"
+      BtnPrint:
+        width: 180
+        size_hint: None, 1
+        text: "Print selected"
+
+
+    BoxLayout:
+      orientation: 'horizontal'
+
+      # left panel
+      BoxLayout:
+        canvas:
+          Color:
+            rgb: 0.12, 0.12, 0.12
+          Rectangle:
+            size: self.size
+            pos: self.pos
+        orientation: 'vertical'
+        width: 200
+        size_hint: None, 1 
+        spacing: 10
+        padding: 10
+        BtnNewCategory:
+          height: 40
+          size_hint: 1, None
+          text: "New category"
+        BtnNewTask:
+          height: 40
+          size_hint: 1, None
+          text: "New task"
+        Widget:
+
+      # content
+      BoxLayout:
+        canvas:
+          Color:
+            rgb: 0.09, 0.09, 0.09
+          Rectangle:
+            size: self.size
+            pos: self.pos
+        orientation: 'vertical'
+        spacing: 10
+        padding: 10
+        Button:
+          text: "testtest1"
+        Button:
+          text: "testtest2"

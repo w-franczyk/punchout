@@ -18,7 +18,28 @@ from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivy.uix.widget import Widget
 
 class ScreenMain(Screen):
-    pass
+    def __init__(self, *args, **kwargs):
+        super(ScreenMain, self).__init__(*args, **kwargs)
+        panel = TabbedPanel()
+
+        item = TabbedPanelItem()
+        item.text = 'panel 1'
+        item.add_widget(TasksPanel())
+        panel.add_widget(item)
+        panel.default_tab = panel.tab_list[0]
+
+        item = TabbedPanelItem()
+        item.text = 'panel 2'
+        item.add_widget(TasksPanel())
+        panel.add_widget(item)
+
+        item = TabbedPanelItem()
+        item.text = 'panel 3'
+        item.add_widget(TasksPanel())
+        panel.add_widget(item)
+
+        self.add_widget(panel)
+
 
 class ScreenAddCategory(Screen):
     pass

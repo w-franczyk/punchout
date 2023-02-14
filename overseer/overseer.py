@@ -14,26 +14,33 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivy.uix.widget import Widget
 
-class MainScreen(Screen):
+class ScreenMain(Screen):
+    pass
+
+class ScreenAddCategory(Screen):
     pass
 
 class Overseer(ScreenManager):
-    mainScreen = None
+    screenAddCategory = None
+    screenMain = None
     def __init__(self, *args, **kwargs):
         super(Overseer, self).__init__(*args, **kwargs)
-        self.mainScreen = MainScreen(name='Overseer')
-        self.add_widget(self.mainScreen)
-        self.switch_to(self.mainScreen)
+        self.screenMain = ScreenMain(name='screenMain')
+        self.screenAddCategory = ScreenAddCategory(name='screenAddCategory')
 
-    def onReleaseBtnNewCategory(self):
-        self.ids.btnNewTask.text = "new category"
-        self.ids.rvTasks.data.insert(0, {'dataId': 'dupa', 'dataTitle': 'dupsko'})
+        self.add_widget(self.screenMain)
+        self.add_widget(self.screenAddCategory)
+        self.switch_to(self.screenMain)
 
 class OverseerApp(App):
     def build(self):
         return Overseer()
+
+class TasksPanel(Widget):
+    pass
 
 class ColorLabel(Label):
     bgColor = ListProperty([0.0, 0.0, 0.0, 1])

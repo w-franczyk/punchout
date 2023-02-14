@@ -1,4 +1,16 @@
-<MainScreen>:
+<ScreenMain>:
+  TabbedPanel
+    TabbedPanelItem:
+      text: 'first tab'
+      TasksPanel
+    TabbedPanelItem:
+      text: 'first tab'
+      TasksPanel
+    TabbedPanelItem:
+      text: 'first tab'
+      TasksPanel
+
+<TasksPanel>:
   BoxLayout:
     orientation: 'vertical'
     size: root.width, root.height
@@ -51,7 +63,7 @@
           height: 40
           size_hint: 1, None
           text: "New category"
-          on_release: root.onReleaseBtnNewCategory()
+          on_release: root.manager.switch_to(root.manager.get_screen('screenAddCategory'))
         Button:
           id: btnNewTask
           height: 40

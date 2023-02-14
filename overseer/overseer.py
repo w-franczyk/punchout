@@ -18,28 +18,19 @@ from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivy.uix.widget import Widget
 
 class ScreenMain(Screen):
-    def __init__(self, *args, **kwargs):
-        super(ScreenMain, self).__init__(*args, **kwargs)
+    def init(self):
         panel = TabbedPanel()
 
-        item = TabbedPanelItem()
-        item.text = 'panel 1'
-        item.add_widget(TasksPanel())
-        panel.add_widget(item)
-        panel.default_tab = panel.tab_list[0]
+        for tabName in ['tab1', 'tab2', 'tab3']:
+            item = TabbedPanelItem()
+            item.text = tabName
+            tasks = TasksPanel()
+            item.add_widget(tasks)
+            self.manager.add_widget(tasks)
+            panel.add_widget(item)
 
-        item = TabbedPanelItem()
-        item.text = 'panel 2'
-        item.add_widget(TasksPanel())
-        panel.add_widget(item)
-
-        item = TabbedPanelItem()
-        item.text = 'panel 3'
-        item.add_widget(TasksPanel())
-        panel.add_widget(item)
-
+        panel.default_tab = panel.tab_list[-2]
         self.add_widget(panel)
-
 
 class ScreenAddCategory(Screen):
     pass
@@ -47,6 +38,7 @@ class ScreenAddCategory(Screen):
 class Overseer(ScreenManager):
     screenAddCategory = None
     screenMain = None
+
     def __init__(self, *args, **kwargs):
         super(Overseer, self).__init__(*args, **kwargs)
         self.screenMain = ScreenMain(name='screenMain')
@@ -54,13 +46,20 @@ class Overseer(ScreenManager):
 
         self.add_widget(self.screenMain)
         self.add_widget(self.screenAddCategory)
+
+        self.screenMain.init()
         self.switch_to(self.screenMain)
 
 class OverseerApp(App):
     def build(self):
         return Overseer()
 
-class TasksPanel(Widget):
+class TasksPanel(Screen):
+#    manager = None
+
+#    def __init__(self, screenManager, *args, **kwargs):
+#        super(TasksPanel, self).__init__(*args, **kwargs)
+#        self.manager = screenManager
     pass
 
 class ColorLabel(Label):

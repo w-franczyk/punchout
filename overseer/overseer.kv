@@ -4,7 +4,6 @@
 
     # left panel
     BoxLayout:
-      id: boxLeftPanel
       canvas:
         Color:
           rgb: 0.12, 0.12, 0.12
@@ -17,23 +16,19 @@
       spacing: 10
       padding: 10
       Button:
-        id: btnNewCategory
         height: 40
         size_hint: 1, None
         text: "New category"
         on_release: root.manager.switch_to(root.manager.get_screen('screenAddCategory'))
       Button:
-        id: btnNewTask
         height: 40
         size_hint: 1, None
         text: "New task"
       Button:
-        id: btnExport 
         height: 40
         size_hint: 1, None
         text: "Export"
       Button:
-        id: btnPrint
         height: 40
         size_hint: 1, None
         text: "Print selected"

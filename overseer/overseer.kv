@@ -1,95 +1,75 @@
 <TasksPanel>:
   BoxLayout:
-    orientation: 'vertical'
-    size: root.width, root.height
-    size_hint: None, None
+    orientation: 'horizontal'
 
-    # top panel
+    # left panel
     BoxLayout:
+      id: boxLeftPanel
       canvas:
         Color:
           rgb: 0.12, 0.12, 0.12
         Rectangle:
           size: self.size
           pos: self.pos
-      height: 60
-      size_hint: 1, None
-      orientation: 'horizontal'
+      orientation: 'vertical'
+      width: 200
+      size_hint: None, 1 
       spacing: 10
       padding: 10
       Button:
+        id: btnNewCategory
+        height: 40
+        size_hint: 1, None
+        text: "New category"
+        on_release: root.manager.switch_to(root.manager.get_screen('screenAddCategory'))
+      Button:
+        id: btnNewTask
+        height: 40
+        size_hint: 1, None
+        text: "New task"
+      Button:
         id: btnExport 
-        width: 180
-        size_hint: None, 1
+        height: 40
+        size_hint: 1, None
         text: "Export"
       Button:
         id: btnPrint
-        width: 180
-        size_hint: None, 1
+        height: 40
+        size_hint: 1, None
         text: "Print selected"
+      Widget:
 
-
+    # content
     BoxLayout:
-      orientation: 'horizontal'
-
-      # left panel
-      BoxLayout:
-        id: boxLeftPanel
-        canvas:
-          Color:
-            rgb: 0.12, 0.12, 0.12
-          Rectangle:
-            size: self.size
-            pos: self.pos
-        orientation: 'vertical'
-        width: 200
-        size_hint: None, 1 
-        spacing: 10
-        padding: 10
-        Button:
-          id: btnNewCategory
-          height: 40
-          size_hint: 1, None
-          text: "New category"
-          on_release: root.manager.switch_to(root.manager.get_screen('screenAddCategory'))
-        Button:
-          id: btnNewTask
-          height: 40
-          size_hint: 1, None
-          text: "New task"
-        Widget:
-
-      # content
-      BoxLayout:
-        canvas:
-          Color:
-            rgb: 0.09, 0.09, 0.09
-          Rectangle:
-            size: self.size
-            pos: self.pos
-        orientation: 'vertical'
-        padding: 10
-        TasksRecycleViewRow:
-          height: 25
-          size_hint: 1, None
-          bgColor: 0.2, 0.2, 0.2, 1
-          selectable: False
-          dataId: 'ID'
-          dataTitle: 'TITLE'
-        TasksRecycleView:
-          id: rvTasks
-          viewclass: 'TasksRecycleViewRow'
-          effect_cls: 'ScrollEffect'
-          scroll_type: ['bars']
-          bar_width: 10
-          TasksRecycleViewLayout:
-            default_size: None, 20
-            default_size_hint: 1, None
-            size_hint_y: None
-            height: self.minimum_height
-            orientation: 'vertical'
-            multiselect: True
-            touch_multiselect: True
+      canvas:
+        Color:
+          rgb: 0.09, 0.09, 0.09
+        Rectangle:
+          size: self.size
+          pos: self.pos
+      orientation: 'vertical'
+      padding: 10
+      TasksRecycleViewRow:
+        height: 25
+        size_hint: 1, None
+        bgColor: 0.2, 0.2, 0.2, 1
+        selectable: False
+        dataId: 'ID'
+        dataTitle: 'TITLE'
+      TasksRecycleView:
+        id: rvTasks
+        viewclass: 'TasksRecycleViewRow'
+        effect_cls: 'ScrollEffect'
+        scroll_type: ['bars']
+        bar_width: 10
+        TasksRecycleViewLayout:
+          default_size: None, 20
+          default_size_hint: 1, None
+          size_hint_y: None
+          height: self.minimum_height
+          orientation: 'vertical'
+          multiselect: True
+          touch_multiselect: True
 
 <ColorLabel>:
   canvas.before:

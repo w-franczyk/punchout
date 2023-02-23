@@ -1,0 +1,23 @@
+[
+  {
+    "model": "punchout_rest.Board",
+    "fields": {
+      "name": "builtin",
+      "type": "b"
+    }
+  },
+  {
+    "model": "punchout_rest.Board",
+    "fields": {
+      "name": "Praca",
+      "type": "u"
+    }
+  },
+  {
+    "model": "punchout_rest.Board",
+    "fields": {
+      "name": "Reszta",
+      "type": "u"
+    }
+  }
+]

@@ -6,6 +6,18 @@ class Tag(models.Model):
     def __str__(self):
         return f"{self.id}. {self.name}"
 
+
+class Board(models.Model):
+    boardTypes = (
+        ('b', 'Built-in'),
+        ('u', 'User defined')
+    )
+    name = models.CharField(max_length=255)
+    type = models.CharField(max_length=1, choices=boardTypes)
+
+    def __str__(self):
+        return f"{self.id}. {self.name}, {self.type}"
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
     colour = models.CharField(max_length=6)

@@ -1,3 +1,4 @@
 *.swp
+*.swo
 *.pyc
 db.sqlite3

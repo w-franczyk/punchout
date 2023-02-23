@@ -19,7 +19,7 @@
         height: 40
         size_hint: 1, None
         text: "New category"
-        on_release: root.manager.switch_to(root.manager.get_screen('screenAddCategory'))
+        on_release: root.btnNewCategoryAction()
       Button:
         height: 40
         size_hint: 1, None
@@ -92,3 +92,16 @@
     size_hint: 0.7, 1
     text: root.dataTitle 
     bgColor: root.bgColor
+
+<ScreenLoading>:
+  Label:
+    text: 'Loading...'
+
+<ScreenAddCategory>:
+  BoxLayout:
+    Label:
+      id: test
+      text: 'dummy'
+    Button:
+      text: "Back"
+      on_release: root.btnBackAction()

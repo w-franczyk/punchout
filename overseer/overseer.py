@@ -16,51 +16,84 @@ from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivy.uix.widget import Widget
+from kivy.clock import Clock, mainthread
+from threading import Thread
+from typing import List
+from rest import Rest, Board
 
 class ScreenMain(Screen):
+    boards: List[Board]
+
     def init(self):
         panel = TabbedPanel()
 
-        for tabName in ['tab1', 'tab2', 'tab3']:
-            item = TabbedPanelItem()
-            item.text = tabName
+        for board in self.boards:
+            if board.type == 'b':
+                continue
+
+            tab = TabbedPanelItem()
+            tab.text = board.name
             tasks = TasksPanel()
-            item.add_widget(tasks)
+            tasks.boardId = board.id
+            tab.add_widget(tasks)
             self.manager.add_widget(tasks)
-            panel.add_widget(item)
+            panel.add_widget(tab)
 
         panel.default_tab = panel.tab_list[-2]
         self.add_widget(panel)
 
 class ScreenAddCategory(Screen):
+    boardId: int = -1
+    backActionScreen: Screen = None
+
+    def on_pre_enter(self, *args):
+        self.ids.test.text = str(self.boardId)
+
+    def btnBackAction(self):
+        self.manager.switch_to(self.backActionScreen)
+
+class ScreenLoading(Screen):
     pass
 
 class Overseer(ScreenManager):
     screenAddCategory = None
     screenMain = None
+    screenLoading = None
 
     def __init__(self, *args, **kwargs):
         super(Overseer, self).__init__(*args, **kwargs)
+        self.screenLoading = ScreenLoading(name='screenLoading')
+        self.add_widget(self.screenLoading)
+        self.switch_to(self.screenLoading)
         self.screenMain = ScreenMain(name='screenMain')
-        self.screenAddCategory = ScreenAddCategory(name='screenAddCategory')
-
         self.add_widget(self.screenMain)
+        self.screenAddCategory = ScreenAddCategory(name='screenAddCategory')
         self.add_widget(self.screenAddCategory)
+        Thread(target=self.getInitData).start()
 
+    def getInitData(self):
+        self.screenMain.boards = Rest.getBoards()
+        self.finishInitialization()
+
+    @mainthread
+    def finishInitialization(self):
         self.screenMain.init()
         self.switch_to(self.screenMain)
 
 class OverseerApp(App):
+    app = None
     def build(self):
-        return Overseer()
+        self.app = Overseer()
+        return self.app
 
 class TasksPanel(Screen):
-#    manager = None
+    boardId: int
 
-#    def __init__(self, screenManager, *args, **kwargs):
-#        super(TasksPanel, self).__init__(*args, **kwargs)
-#        self.manager = screenManager
-    pass
+    def btnNewCategoryAction(self):
+        screenAddCategory = self.manager.screenAddCategory
+        screenAddCategory.boardId = self.boardId
+        screenAddCategory.backActionScreen = self.manager.screenMain
+        self.manager.switch_to(screenAddCategory)
 
 class ColorLabel(Label):
     bgColor = ListProperty([0.0, 0.0, 0.0, 1])

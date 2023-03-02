@@ -18,8 +18,8 @@
       Button:
         height: 40
         size_hint: 1, None
-        text: "New category"
-        on_release: root.btnNewCategoryAction()
+        text: "Categories"
+        on_release: root.btnCategoriesAction()
       Button:
         height: 40
         size_hint: 1, None
@@ -97,11 +97,3 @@
   Label:
     text: 'Loading...'
 
-<ScreenAddCategory>:
-  BoxLayout:
-    Label:
-      id: test
-      text: 'dummy'
-    Button:
-      text: "Back"
-      on_release: root.btnBackAction()

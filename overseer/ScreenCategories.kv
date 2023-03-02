@@ -1,0 +1,74 @@
+<ScreenCategories>:
+  BoxLayout:
+    orientation: 'vertical'
+
+    # top
+    StackLayout:
+      spacing: 10
+      padding: 10
+      canvas:
+        Color:
+          rgb: 0.15, 0.15, 0.15
+        Rectangle:
+          size: self.size
+          pos: self.pos
+      height: 60
+      size_hint: 1, None
+      Button:
+        height: 40
+        width: 150
+        size_hint: None, None
+        text: "New category"
+        on_release: root.btnNewCategoryAction()
+      
+
+    # middle (categories)
+    StackLayout:
+      canvas:
+        Color:
+          rgb: 0.12, 0.12, 0.12
+        Rectangle:
+          size: self.size
+          pos: self.pos
+      spacing: 10
+      padding: 10
+      Button:
+        height: 40
+        width: 500
+        size_hint: None, None
+        text: "New task"
+        on_release: root.btnCategoriesAction()
+      Button:
+        height: 40
+        width: 100
+        size_hint: None, None
+        text: "New task"
+      Button:
+        height: 40
+        width: 100
+        size_hint: None, None
+        text: "Export"
+      Button:
+        height: 40
+        width: 100
+        size_hint: None, None
+        text: "Print selected"
+
+    # bottom
+    StackLayout:
+      spacing: 10
+      padding: 10
+      canvas:
+        Color:
+          rgb: 0.15, 0.15, 0.15
+        Rectangle:
+          size: self.size
+          pos: self.pos
+      height: 60
+      size_hint: 1, None
+      Button:
+        height: 40
+        width: 150
+        size_hint: None, None
+        text: "Back"
+        on_release: root.btnBackAction()

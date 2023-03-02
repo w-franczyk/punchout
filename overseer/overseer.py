@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+from ScreenCategories import ScreenCategories
+
 from kivy.app import App
 from kivy.properties import BooleanProperty
 from kivy.properties import ListProperty
@@ -42,21 +44,12 @@ class ScreenMain(Screen):
         panel.default_tab = panel.tab_list[-2]
         self.add_widget(panel)
 
-class ScreenAddCategory(Screen):
-    boardId: int = -1
-    backActionScreen: Screen = None
-
-    def on_pre_enter(self, *args):
-        self.ids.test.text = str(self.boardId)
-
-    def btnBackAction(self):
-        self.manager.switch_to(self.backActionScreen)
 
 class ScreenLoading(Screen):
     pass
 
 class Overseer(ScreenManager):
-    screenAddCategory = None
+    screenCategories = None
     screenMain = None
     screenLoading = None
 
@@ -67,8 +60,8 @@ class Overseer(ScreenManager):
         self.switch_to(self.screenLoading)
         self.screenMain = ScreenMain(name='screenMain')
         self.add_widget(self.screenMain)
-        self.screenAddCategory = ScreenAddCategory(name='screenAddCategory')
-        self.add_widget(self.screenAddCategory)
+        self.screenCategories = ScreenCategories(name='screenCategories')
+        self.add_widget(self.screenCategories)
         Thread(target=self.getInitData).start()
 
     def getInitData(self):
@@ -89,11 +82,11 @@ class OverseerApp(App):
 class TasksPanel(Screen):
     boardId: int
 
-    def btnNewCategoryAction(self):
-        screenAddCategory = self.manager.screenAddCategory
-        screenAddCategory.boardId = self.boardId
-        screenAddCategory.backActionScreen = self.manager.screenMain
-        self.manager.switch_to(screenAddCategory)
+    def btnCategoriesAction(self):
+        screenCategories = self.manager.screenCategories
+        screenCategories.boardId = self.boardId
+        screenCategories.backActionScreen = self.manager.screenMain
+        self.manager.switch_to(screenCategories)
 
 class ColorLabel(Label):
     bgColor = ListProperty([0.0, 0.0, 0.0, 1])

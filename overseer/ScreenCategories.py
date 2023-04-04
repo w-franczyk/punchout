@@ -10,4 +10,12 @@ class ScreenCategories(PunchoutScreen):
 
     #def on_pre_enter(self, *args):
     #    self.ids.test.text = str(self.boardId)
+    def on_leave(self):
+        print('leaving')
+
+    def btnNewCategoryAction(self):
+        screenNewCategory = self.manager.screenNewCategory
+        screenNewCategory.boardId = self.boardId
+        screenNewCategory.backActionScreen = self.manager.screenCategories
+        self.manager.switch_to(screenNewCategory)
 

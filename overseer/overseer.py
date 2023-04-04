@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 from ScreenCategories import ScreenCategories
+from ScreenDialogInfo import ScreenDialogInfo
+from ScreenNewCategory import ScreenNewCategory
 
 from kivy.app import App
 from kivy.properties import BooleanProperty
@@ -52,6 +54,8 @@ class Overseer(ScreenManager):
     screenCategories = None
     screenMain = None
     screenLoading = None
+    screenNewCategory: ScreenNewCategory = None
+    screenDialogInfo: ScreenDialogInfo = None
 
     def __init__(self, *args, **kwargs):
         super(Overseer, self).__init__(*args, **kwargs)
@@ -62,6 +66,11 @@ class Overseer(ScreenManager):
         self.add_widget(self.screenMain)
         self.screenCategories = ScreenCategories(name='screenCategories')
         self.add_widget(self.screenCategories)
+        self.screenNewCategory = ScreenNewCategory(name='screenNewCategory')
+        self.add_widget(self.screenNewCategory)
+        self.screenDialogInfo = ScreenDialogInfo(name='screenDialogInfo')
+        self.add_widget(self.screenDialogInfo)
+
         Thread(target=self.getInitData).start()
 
     def getInitData(self):
@@ -72,6 +81,7 @@ class Overseer(ScreenManager):
     def finishInitialization(self):
         self.screenMain.init()
         self.switch_to(self.screenMain)
+        #self.switch_to(self.screenCategories)
 
 class OverseerApp(App):
     app = None

@@ -20,10 +20,11 @@ class Board(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    colour = models.CharField(max_length=6)
+    colour = models.CharField(max_length=9)
+    boardId = models.ForeignKey(Board, on_delete=models.RESTRICT)
 
     def __str__(self):
-        return f"{self.id}. {self.name}, {self.colour}"
+        return f"{self.id}. {self.name}, {self.colour}, {self.boardId}"
 
 class Task(models.Model):
     title = models.CharField(max_length=1234)

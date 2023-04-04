@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from punchout_rest.views import GetBoardsView
+from punchout_rest.views import GetBoardsView, CategoriesView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('getboards/', GetBoardsView.as_view()),
+    path('categories/', CategoriesView.as_view()),
 ]

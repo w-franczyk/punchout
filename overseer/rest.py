@@ -1,9 +1,10 @@
-from requests import get
+from requests import get, post
 from typing import List
 import json
 import collections
 
 Board = collections.namedtuple('Board', ['id', 'name', 'type'])
+Category = collections.namedtuple('Board', ['id', 'name', 'colour', 'boardId'])
 
 class Rest:
     url = 'http://localhost:8000'
@@ -22,3 +23,12 @@ class Rest:
             raise
 
         return items
+    
+    @staticmethod
+    def addCategory(name, colour, boardId):
+        data = {'name': name, 'colour': colour, 'boardId': boardId}
+        #data = {'name': 'dupa', 'colour': 'ff0000', 'boardId': 2}
+        print(data)
+        response = post(Rest.url + '/categories/', json=data)
+        print(response.text)
+        print(response.json())

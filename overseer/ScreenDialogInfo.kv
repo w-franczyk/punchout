@@ -1,0 +1,36 @@
+<ScreenDialogInfo>:
+  BoxLayout:
+    orientation: 'vertical'
+
+    BoxLayout:
+      orientation: 'vertical'
+      canvas:
+        Color:
+          rgb: 0.12, 0.12, 0.12
+        Rectangle:
+          size: self.size
+          pos: self.pos
+      spacing: 10
+      padding: 10
+      Label:
+        text: 'NO TEXT'
+        id: lblTxt
+
+    # bottom
+    StackLayout:
+      spacing: 10
+      padding: 10
+      canvas:
+        Color:
+          rgb: 0.15, 0.15, 0.15
+        Rectangle:
+          size: self.size
+          pos: self.pos
+      height: 60
+      size_hint: 1, None
+      Button:
+        height: 40
+        width: 150
+        size_hint: None, None
+        text: "OK"
+        on_release: root.btnBackAction()
